@@ -46,10 +46,42 @@ def num_of_paragraphs(file_name):
     return count
 
 
+
+
+def words_per_sentence(file_name):
+    array = []
+    count = 0
+    var = open(file_name, "r")
+    for line in var:
+        for letter in line:
+            if (letter==(".") or letter==("?") or letter==("!")):
+                array.append(count+1)
+            elif letter==" ":
+                count+=1
+    avg = 0
+    for val in array:
+        avg+=val
+    return avg/(len(array))
+
+
+
+def characters_per_word():
+    pass
+
+def flesch_reading_ease():
+    pass
+
+def fleschkincaid_grade_level():
+    pass
+
 def sentences_per_paragraph():
     pass
 
-print(num_of_sentences("testFile.txt"))
-print(num_of_characters("testFile.txt"))
-print(num_of_words("testFile.txt"))
-print(num_of_paragraphs("testFile.txt"))
+def passive_sentences():
+    pass
+
+#print(num_of_sentences("testFile.txt"))
+#print(num_of_characters("testFile.txt"))
+#print(num_of_words("testFile.txt"))
+#print(num_of_paragraphs("testFile.txt"))
+print(words_per_sentence("testFile.txt"))
