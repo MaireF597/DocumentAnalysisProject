@@ -54,19 +54,35 @@ def words_per_sentence(file_name):
     var = open(file_name, "r")
     for line in var:
         for letter in line:
+            if (letter=="\n"):
+                count=-1
             if (letter==(".") or letter==("?") or letter==("!")):
                 array.append(count+1)
+                count=0
             elif letter==" ":
                 count+=1
-    avg = 0
+    sum = 0
     for val in array:
-        avg+=val
-    return avg/(len(array))
+        sum=sum+val
+    return (sum/(len(array)))
 
 
 
-def characters_per_word():
-    pass
+def characters_per_word(file_name):
+    array = []
+    count = 0
+    var = open(file_name, "r")
+    for line in var:
+        for letter in line:
+            if (letter==(" ")):
+                array.append(count+1)
+                count=0
+            else:
+                count+=1
+    sum = 0
+    for val in array:
+        sum=sum+val
+    return (sum/(len(array)))
 
 def flesch_reading_ease():
     pass
