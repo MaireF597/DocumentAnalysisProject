@@ -1,1 +1,1 @@
-We're so grateful for your interest in coding with us this summer. While we can't guarantee that you will receive placement due to an overwhelming response from applicants, we appreciate your patience and hope you'll stay part of our Girls Who Code community in the meantime.
+Using the equality operator (==): This compares two strings for exact match, the easiest way to see if two strings are equivalent, including case sensitivity. Using the inequality operator (!=): This checks whether the two strings are not equal, and can be used to compare strings for inequality.
