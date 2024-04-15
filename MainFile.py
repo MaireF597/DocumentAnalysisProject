@@ -1,11 +1,14 @@
 
 def num_of_sentences(file_name):
+    alph_string = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    last_letter=""
     count = 0
     var = open(file_name, "r")
     for line in var:
         for letter in line:
-            if (letter==(".") or letter==("?") or letter==("!")):
+            if (letter==(".") or letter==("?") or letter==("!") and last_letter in alph_string):
              count+=1
+             last_letter = letter
     return count
 
 def num_of_characters(file_name):
@@ -13,7 +16,7 @@ def num_of_characters(file_name):
     var = open(file_name, "r")
     for line in var:
         for letter in line:
-            if letter!=" ":
+            if letter!=" " and letter!="\n":
                 count+=1
     return count
 
@@ -23,11 +26,14 @@ def num_of_words(file_name):
     var = open(file_name, "r")
     for line in var:
         for letter in line:
-                if letter==" " and last_letter!=(".") and last_letter!=("?") and last_letter!=("!"):
+                if letter==" " and last_letter!=":" and last_letter!=";":
                     count+=1
                 last_letter=letter
     if (count>1):
-        count+=1
+        if (num_of_paragraphs(file_name)>1):
+            count+=num_of_paragraphs(file_name)
+        else:
+            count+=1
     return count
 
 def num_of_paragraphs(file_name):
@@ -35,7 +41,7 @@ def num_of_paragraphs(file_name):
     var = open(file_name, "r")
     for line in var:
         for letter in line:
-            if letter=="\t":
+            if letter=="\n":
                 count+=1
     return count
 
@@ -43,13 +49,16 @@ def num_of_paragraphs(file_name):
 def sentences_per_paragraph(file_name):
     array = []
     count=0
+    alph_string = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    last_letter=""
     var = open(file_name, "r")
     for line in var:
         for letter in line:
             if (letter=="\n"):
                 array.append(count)
-            elif (letter==(".") or letter==("?") or letter==("!")):
+            elif (letter==(".") or letter==("?") or letter==("!")and last_letter in alph_string):
                 count+=1
+                last_letter=letter
     array.append(count)
     sum = 0
     for val in array:
@@ -58,23 +67,25 @@ def sentences_per_paragraph(file_name):
 
 def words_per_sentence(file_name):
     array = []
+    alph_string = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    last_letter=""
     count = 0
     var = open(file_name, "r")
     for line in var:
         for letter in line:
             if (letter=="\n"):
-                count=0
-            if (letter==(".") or letter==("?") or letter==("!")):
+                count=1
+            if (letter==(".") or letter==("?") or letter==("!")and last_letter in alph_string):
                 array.append(count)
-                count=-1
-            elif letter==" ":
+                count=0
+            elif letter==" " and last_letter!=":" and last_letter!=";":
                 count+=1
-    sum = 0
+            last_letter=letter
+   
+    sum = 1
     for val in array:
         sum=sum+val
     return (round(sum/(len(array)),1))
-
-
 
 def characters_per_word(file_name):
     array = []
@@ -98,10 +109,8 @@ def characters_per_word(file_name):
         sum=sum+val
     return (round(sum/(len(array)),1))
 
-
 def syllable_counter(file_name):
     pass
-
 
 def flesch_reading_ease(file_name):
     pass
@@ -149,15 +158,15 @@ def passive_sentences():
     pass
 
 
-def essay_reader(file_name):
+def document_reader(file_name):
     print("Words: " ,num_of_words(file_name))
     print("Characters: ", num_of_characters(file_name))
-    print("paragraphs: ",num_of_paragraphs(file_name))
-    print("sentences: ",num_of_sentences(file_name))
-    print("sentences per paragraph: ",sentences_per_paragraph(file_name))
-    print("words per sentence: ",words_per_sentence(file_name))
-    print("character per word: ",characters_per_word(file_name))
+    print("Paragraphs: ",num_of_paragraphs(file_name))
+    print("Sentences: ",num_of_sentences(file_name))
+    print("Sentences per Paragraph: ",sentences_per_paragraph(file_name))
+    print("words per Sentence: ",words_per_sentence(file_name))
+    print("Characters per Word: ",characters_per_word(file_name))
     #print("flesch_reading_ease: ",flesch_reading_ease(file_name))
     #print("fleschkincaid_grade_level: ",fleschkincaid_grade_level(file_name))
 
-essay_reader("testFile.txt")
+document_reader("testFile.txt")
