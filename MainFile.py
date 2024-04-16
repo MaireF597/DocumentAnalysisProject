@@ -136,7 +136,7 @@ def flesch_reading_ease(file_name):
 
 def fleschkincaid_grade_level(file_name):
     pass
-    # 20(.39*ASL)+(11.8*ASW) - 15.59
+    # (.39*ASL)+(11.8*ASW) - 15.59
     # ASL - average sentence length (num of words/num of sentences)
     # ASW - average num of syllables per word (num of syllables / num of words)
     syll_sum = 0
